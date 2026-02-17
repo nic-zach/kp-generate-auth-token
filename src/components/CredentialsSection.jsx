@@ -4,6 +4,8 @@ function CredentialsSection({
   onCredentialsChange,
   onRememberSessionChange,
   onClearCredentials,
+  onStartAuthorization,
+  disabled,
 }) {
   const handleClientTokenChange = (e) => {
     onCredentialsChange({
@@ -76,6 +78,18 @@ function CredentialsSection({
           onClick={onClearCredentials}
         >
           Clear Credentials
+        </button>
+      </div>
+
+      <div className="form-actions" style={{ marginTop: 'var(--spacing-lg)' }}>
+        <button
+          type="button"
+          className="btn-primary"
+          onClick={onStartAuthorization}
+          disabled={disabled}
+          style={{ width: '100%' }}
+        >
+          Start Authorization Flow
         </button>
       </div>
     </section>

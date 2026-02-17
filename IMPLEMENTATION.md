@@ -23,7 +23,7 @@ This application now properly integrates with the **official Klarna Payments SDK
 ## The Correct Flow
 
 ```
-1. User enters client_token + payment_method_category + session_id
+1. User enters client_token + payment_method_category
    ↓
 2. Click "Start Authorization Flow"
    ↓
@@ -43,6 +43,17 @@ This application now properly integrates with the **official Klarna Payments SDK
    ↓
 10. Display authorization_token to user
 ```
+
+## Important: Session ID NOT Required
+
+The `session_id` returned from backend session creation is **NOT needed** for the frontend SDK integration:
+
+- ❌ **NOT passed to** `load()` or `authorize()`
+- ✅ **Session reference is in** `client_token`
+- ✅ **Returned FROM** `authorize()` callback (along with authorization_token)
+- ℹ️ **Used for** backend operations only (updating session, retrieving details)
+
+The `client_token` already contains all the session information the SDK needs!
 
 ## Files Created/Modified
 

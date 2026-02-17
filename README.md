@@ -52,8 +52,9 @@ The built application can also be deployed to any static hosting service.
 ### Step 1: Create a Session (Backend)
 
 Use your backend to create a Klarna Playground session via the API. From the response, you'll need:
-- **Client Token** (e.g., `client_token` field)
-- **Session Client ID** (e.g., `session_id` or `client_id` field)
+- **Client Token** (the `client_token` field)
+
+**Note:** The `session_id` from the response is used for backend operations only - it's NOT needed for the frontend SDK integration. The `client_token` already contains the session reference.
 
 ### Step 2: Open the Application
 
@@ -74,11 +75,7 @@ In the **Session Configuration** section, enter:
 - Use the "Temporarily remember in session" toggle to persist it across page reloads (stored in sessionStorage only)
 - Click "Clear Credentials" to remove all stored data
 
-### Step 4: Enter Session Client ID
-
-In the **Session Configuration** section below, enter the **Session Client ID** from your session creation response.
-
-### Step 5: Initialize and Load Widget
+### Step 4: Initialize and Load Widget
 
 Click **"Start Authorization Flow"** to:
 
@@ -86,15 +83,15 @@ Click **"Start Authorization Flow"** to:
 2. Load the Klarna payment widget
 3. The widget will render on the page
 
-### Step 6: Complete Payment Details
+### Step 5: Complete Payment Details
 
 Fill out the Klarna payment widget with the required payment information. The widget is interactive and provided directly by Klarna.
 
-### Step 7: Authorize Payment
+### Step 6: Authorize Payment
 
 Once you've completed the payment details in the widget, click **"Authorize Payment"** to get your authorization token.
 
-### Step 8: Retrieve Token
+### Step 7: Retrieve Token
 
 Upon successful authorization, the **Authorization Token** will be displayed in the result section. You can:
 

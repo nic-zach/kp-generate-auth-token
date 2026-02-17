@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import EnvironmentBanner from './components/EnvironmentBanner'
 import CredentialsSection from './components/CredentialsSection'
-import SessionSection from './components/SessionSection'
 import KlarnaWidget from './components/KlarnaWidget'
 import FlowStatus from './components/FlowStatus'
 import AuthorizationResult from './components/AuthorizationResult'
@@ -15,9 +14,6 @@ function App() {
     paymentMethodCategory: '',
   })
   const [rememberSession, setRememberSession] = useState(false)
-
-  // Session state
-  const [sessionClientId, setSessionClientId] = useState('')
 
   // Error state
   const [error, setError] = useState(null)
@@ -105,10 +101,6 @@ function App() {
       setError({ message: 'Payment method category is required' })
       return
     }
-    if (!sessionClientId.trim()) {
-      setError({ message: 'Session Client ID is required' })
-      return
-    }
 
     // Clear previous error and token
     setError(null)
@@ -171,7 +163,6 @@ function App() {
   }
 
   const handleReset = () => {
-    setSessionClientId('')
     setError(null)
     setAuthorizationToken(null)
     setTimestamp(null)
@@ -182,7 +173,6 @@ function App() {
   const isStartButtonDisabled =
     !credentials.clientToken ||
     !credentials.paymentMethodCategory ||
-    !sessionClientId.trim() ||
     sdkFlowState === 'initializing_sdk' ||
     sdkFlowState === 'loading_widget'
 
@@ -208,11 +198,6 @@ function App() {
           onCredentialsChange={handleCredentialsChange}
           onRememberSessionChange={setRememberSession}
           onClearCredentials={handleClearCredentials}
-        />
-
-        <SessionSection
-          sessionClientId={sessionClientId}
-          onSessionClientIdChange={setSessionClientId}
           onStartAuthorization={handleStartFlow}
           disabled={isStartButtonDisabled}
         />
